@@ -8,7 +8,7 @@ rm -rf ./data/tmp/*White ./data/tmp/*Yellow ./data/tmp/*Cyan ./data/tmp/*Purple 
 clear
 sleep 1
 echo -e "\e[1;31mcustomShell\e[0m""\e[1;35m(&_&)\e[0m";
-echo -e "\e[1;31mversion: 1.0.0\e[0m";
+echo -e "\e[1;31mversion: 1.1.0\e[0m";
 echo -e "\e[1;33mvk: https://vk.com/linuxkelly\e[0m";
 echo "";
 echo -e "\e[1;32m Are you want to install display of the time?\e[0m";
