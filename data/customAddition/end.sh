@@ -15,7 +15,7 @@ echo -e "\e[1;32m select:\e[0m";
  read go
 #KellyShyno
     if [[ $go == 0 ]]; then
-./data/coolThing/shell.sh;
+./data/customAddition/shell.sh;
 clear
 echo -e "\e[1;33minstalling shell..\e[0m";
 sleep 3
@@ -46,7 +46,7 @@ echo -e "\e[1;32m select:\e[0m";
  read go
 #KellyShyno
         if [[ $go == 0 ]]; then
-./data/coolThing/shell.sh;
+./data/customAddition/shell.sh;
 clear
 echo -e "\e[1;33minstalling shell..\e[0m";
 sleep 3
