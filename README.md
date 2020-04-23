@@ -1,6 +1,7 @@
 #KellyShyno
 #customShell
 #that program change your shell on your taste..
+#rise
 #installing..
 cd ~
 git clone https://github.com/KellyShyno/customShell
