@@ -100,6 +100,7 @@ cat ./data/coolThing/bashDef.md > /data/data/com.termux/files/usr/etc/bash.bashr
         else
 #copying alias on aliasGrep.md
 cat ~/../usr/etc/bash.bashrc | grep alias > ./data/customAddition/aliasGrep.md
+chmod a+rx ./data/customAddition/aliasGrep.md
 
 #saving old shell, if it isn't exist
 
