@@ -1,5 +1,5 @@
 #!/bin/bash
-#KellyShyno
+#shyno
 #customBash
 #version: 2.2.1
 
@@ -10,8 +10,7 @@ chmod -R a+rx *;
 banner()
 {
 clear;
-sleep 0.16;
-echo "";
+sleep 0.1;
 echo -e '\e[1;36m                _                  ____            _\e[0m';
 echo -e '\e[1;36m  ___ _   _ ___| |_ ___  _ __ ___ | __ )  __ _ ___| |__\e[0m';
 echo -e '\e[1;35m / __| | | / __| __/ _ \| "_ " _ \|  _ \ / _" / __|  _ \\\e[0m';
@@ -32,7 +31,7 @@ clear; echo -e "\e[1;31mERROR: write the correct sign..\e[0m"; sleep 0.6;
 input()
 {
 echo "";
-echo -en "\e[1;35m (\e[0m""\e[1;31m#\e[0m""\e[1;35m_\e[0m""\e[1;31m#\e[0m";
+echo -en "\e[1;35m (\e[0m""\e[1;31mo\e[0m""\e[1;35m_\e[0m""\e[1;31mO\e[0m";
 echo -en "\e[1;35m)\e[0m" "\e[1;31m> \e[0m";
 }
 
@@ -54,17 +53,16 @@ echo "";
 }
 
 
-back()
+anyKey()
 {
 echo "";
-echo -e "\e[1;33m====================================\e[0m";
-echo -en '\e[1;33m|  \e[0m'"\e[1;31m[ \e[0m""\e[1;36mb\e[0m""\e[1;31m ] \e[0m";
-echo -en "\e[1;36mback\e[0m"'\e[1;33m  ||  ';
-echo -en "\e[1;35m[ \e[0m""\e[1;36md\e[0m""\e[1;35m ] \e[0m";
-echo -e "\e[1;36mdownload\e[0m"'\e[1;33m  |';
-echo -e "\e[1;33m====================================\e[0m";
+echo -en "\e[1;30mpress any key: \e[0m";
+ read choice
+    case $choice in
+"") $1; ;;
+*) $1; ;;
+    esac;
 }
-
 
 color()
 {
@@ -80,32 +78,10 @@ echo -e "\e[1;35m/ \e[0m""\e[1;36m8\e[0m""\e[1;35m / \e[0m""\e[1;34mblue\e[0m";
 }
 
 
-aboutUs()
-{
-banner;
-backOrExit;
-echo -en "\e[1;36m⊹ \e[0m";
-echo -e "\e[1;35mProgram:\e[0m" "\e[1;4;36mcustomBash\e[0m";
-echo -en "\e[1;36m⊹ \e[0m";
-echo -e "\e[1;35mAuthor:\e[0m" "\e[1;4;36mKellyShyno\e[0m";
-echo -en "\e[1;36m⊹ \e[0m";
-echo -e "\e[1;35mVk:\e[0m" "\e[1;4;36mhttps://vk.com/linuxkelly\e[0m";
-echo "";
-back;
-input;
-  read backAboutUs
-    case $backAboutUs in
-"b") shyno; ;;
-"x") echo ""; exit 0; ;;
-*) error; aboutUs; ;;
-    esac;
-}
-
-
 colorHandling()
 {
     case $colorBlock in
-1) colorBlock="\\\e[1;37m$block\\\e[0m"; ;;
+1) colorBlock="$block"; ;;
 2) colorBlock="\\\e[1;30m$block\\\e[0m"; ;;
 3) colorBlock="\\\e[1;36m$block\\\e[0m"; ;;
 4) colorBlock="\\\e[1;35m$block\\\e[0m"; ;;
@@ -121,68 +97,60 @@ colorHandling()
 theEnd()
 {
 banner;
-echo -e "\e[1;32mComplete\e[0m";
-
-  case $endText in
-"nothing") echo -en "\e[1;35mYou set nothing..\e[0m"; ;;
-*) echo -en "\e[1;36mOpen new shell to see changes..\e[0m"; ;;
-  esac;
-
-echo -en "\e[1;35m(\e[0m""\e[1;31m#\e[0m""\e[1;35m_\e[0m""\e[1;31m#\e[0m";
-echo -e "\e[1;35m)\e[0m";
+echo -e "\e[1;36mComplete\e[0m";
 echo "";
-echo -en "\e[1;30mpress any key: \e[0m";
- read end
-    case $end in
-"") shyno; ;;
-*) shyno; ;;
-    esac;
+echo -e "\e[1;35mOpen new shell to see changes :3\e[0m";
+anyKey shyno;
 }
 
 
-backupConfig()
+backupModule()
 {
-#TODO
-echo
-}
-
-
-bashCheckModule()
-{
-  if [[ $timeValue == "n" ]]; then
-    if [[ $userValue == "n" ]]; then
-      sed -i "s/.*PS1.*/PS1=\'$customAdditionColor\\\w\\\\$ \'/" /data/data/com.termux/files/usr/etc/bash.bashrc;
-    else
-      sed -i "s/.*PS1.*/PS1=\'$userColor $customAdditionColor\\\w\\\\$ \'/" /data/data/com.termux/files/usr/etc/bash.bashrc;
-    fi;
+if [[ $timeValue == "n" && $userValue == "n" && $customAdditionValue == "n" ]]; then
+#backup motd
+  if [[ -f data/backup/motd/motd ]]; then
+echo;
   else
-    sed -i "s/.*PS1.*/PS1=\'$timeColor $userColor $customAdditionColor\\\w\\\\$ \'/" /data/data/com.termux/files/usr/etc/bash.bashrc;
+cp $PREFIX/etc/motd data/backup/motd/;
   fi;
+else
+#backup bash.bashrc
+  if [[ -f data/backup/bash.bashrc/bash.bashrc ]]; then
+echo;
+  else
+cp $PREFIX/etc/bash.bashrc data/backup/bash.bashrc/;
+  fi;
+fi;
 }
 
 
 installing()
 {
 #backup
-backupConfig;
+backupModule;
 
-#custom bash
-#processing
-colorBlock=$timeColor; block="\\\@"; colorHandling; timeColor=$colorBlock
-colorBlock=$userColor; block="\\\u"; colorHandling; userColor=$colorBlock
+#config
+colorBlock=$timeColor; block="\\\@"; colorHandling; timeColor=$colorBlock;
+colorBlock=$userColor; block="\\\u"; colorHandling; userColor=$colorBlock;
 colorBlock=$customAdditionColor; block="\\$customAdditionText";
 colorHandling; customAdditionColor=$colorBlock;
 
 #installing custom bash
-if [[ $timeValue == "n" && $userValue == "n" && $customAdditionValue == "n" && $motdValue == "n" ]]; then
- endText="nothing";
-elif [[ $timeValue == "n" && $userValue == "n" && $customAdditionValue == "n" ]]; then
- echo;
+if [[ $timeValue == "n" && $userValue == "n" && $customAdditionValue == "n" ]]; then
+  echo;
 else
- bashCheckModule;
+  if [[ $timeValue == "n" ]]; then
+    if [[ $userValue == "n" ]]; then
+sed -i "s/.*PS1.*/PS1=\'$customAdditionColor\\\w\\\\$ \'/" /data/data/com.termux/files/usr/etc/bash.bashrc;
+    else
+sed -i "s/.*PS1.*/PS1=\'$userColor $customAdditionColor\\\w\\\\$ \'/" /data/data/com.termux/files/usr/etc/bash.bashrc;
+    fi;
+  else
+sed -i "s/.*PS1.*/PS1=\'$timeColor $userColor $customAdditionColor\\\w\\\\$ \'/" /data/data/com.termux/files/usr/etc/bash.bashrc;
+  fi;
 fi;
 
-#custom motd
+#installing custom motd
   case $motdValue in
 "y") echo "" > /data/data/com.termux/files/usr/etc/motd;
 echo "$motdText" >> /data/data/com.termux/files/usr/etc/motd;
@@ -194,7 +162,7 @@ theEnd; ;;
 }
 
 
-returnOrContinue()
+continueOrReturn()
 {
 banner;
 backOrExit;
@@ -203,14 +171,27 @@ echo "";
 echo -e "\e[1;35m/ \e[0m""\e[1;36m1\e[0m""\e[1;35m / \e[0m""\e[1;36mcontinue\e[0m";
 echo -e "\e[1;35m/ \e[0m""\e[1;36m2\e[0m""\e[1;35m / \e[0m""\e[1;36mreturn\e[0m";
 input;
- read retCont
-    case $retCont in
+ read choice
+    case $choice in
 1) installing; ;;
 2) timeDisplay; ;;
 "b") motdDisplay; ;;
 "x") echo ""; exit 0; ;;
-*) error; returnOrContinue; ;;
+*) error; continueOrReturn; ;;
   esac;
+}
+
+
+checkBlocksExist()
+{
+if [[ $timeValue == "n" && $userValue == "n" && $customAdditionValue == "n" && $motdValue == "n" ]]; then
+banner;
+echo -e "\e[1;36mYou set nothing..";
+anyKey shyno;
+else
+continueOrReturn;
+fi;
+
 }
 
 
@@ -225,7 +206,7 @@ input;
 "b") motdDisplay; ;;
 "x") echo ""; exit 0; ;;
 "") error; motdText; ;;
-*) returnOrContinue; ;;
+*) continueOrReturn; ;;
   esac;
 }
 
@@ -239,7 +220,7 @@ inputYN;
  read motdValue
     case $motdValue in
 "y") motdText; ;;
-"n") returnOrContinue; ;;
+"n") checkBlocksExist; ;;
 "b") customAdditionDisplay; ;;
 "x") echo ""; exit 0; ;;
 *) error; motdDisplay; ;;
@@ -305,8 +286,7 @@ input;
  read timeColor
     case $timeColor in
 1) userDisplay; ;;
-2) userDisplay; ;;
-3) userDisplay; ;;
+2) userDisplay; ;;                                                                                   3) userDisplay; ;;
 4) userDisplay; ;;
 5) userDisplay; ;;
 6) userDisplay; ;;
@@ -393,31 +373,57 @@ inputYN;
 }
 
 
-returnBash()
-{
-banner;
-echo -e "\e[1;35msoon..\e[0m";
-echo "";
-echo -en "\e[1;30mpress any key: \e[0m";
- read returnBash
-    case $returnBash in
-"") shyno; ;;
-*) shyno; ;;
-    esac;
-}
-
-
 returnMotd()
 {
 banner;
-echo -e "\e[1;35msoon..\e[0m";
-echo "";
-echo -en "\e[1;30mpress any key: \e[0m";
- read returnMotd
-    case $returmMotd in
-"") shyno; ;;
-*) shyno; ;;
-    esac;
+echo -e "Восстановить motd или сделать данный по умолчанию";
+echo -e "0. восстановить";
+echo -e "1. сделать данный по умолчанию";
+input;
+ read choice
+  case $choice in
+0)  if [[ -f data/backup/motd/motd ]]; then
+cp data/backup/motd/motd $PREFIX/etc/;
+banner;
+echo good;
+anyKey shyno;
+    else
+banner;
+echo shit;
+anyKey shyno;
+    fi; ;;
+1) cp $PREFIX/etc/motd data/backup/motd/;
+banner;
+echo good;
+anyKey shyno; ;;
+  esac;
+}
+
+
+returnBash()
+{
+banner;
+echo -e "Восстановить шелл или сделать данный по умолчанию";
+echo -e "0. восстановить";
+echo -e "1. сделать данный по умолчанию";
+input;
+ read choice
+  case $choice in
+0)  if [[ -f data/backup/bash.bashrc/bash.bashrc ]]; then
+cp data/backup/bash.bashrc/bash.bashrc $PREFIX/etc/;
+banner;
+echo good;
+anyKey shyno;
+    else
+banner;
+echo shit;
+anyKey shyno;
+    fi; ;;
+1) cp $PREFIX/etc/bash.bashrc data/backup/bash.bashrc/;
+banner;
+echo good;
+anyKey shyno; ;;
+  esac;
 }
 
 
@@ -425,12 +431,30 @@ patternBash()
 {
 banner;
 echo -e "\e[1;35msoon..\e[0m";
+anyKey shyno;
+}
+
+
+aboutProgram()
+{
+banner;
+echo -e "\e[1;30mTo back: 'b' | To exit: 'x'\e[0m";
+echo -e "\e[1;30mTo update: 'u'\e[0m";
 echo "";
-echo -en "\e[1;30mpress any key: \e[0m";
- read patternBash
-    case $patternBash in
-"") shyno; ;;
-*) shyno; ;;
+echo -en "\e[1;36m⊹ \e[0m";
+echo -e "\e[1;35mProgram:\e[0m" "\e[1;36mcustomBash\e[0m";
+echo -en "\e[1;36m⊹ \e[0m";
+echo -e "\e[1;35mCreator:\e[0m" "\e[1;36mshyno\e[0m";
+echo -en "\e[1;36m⊹ \e[0m";
+echo -e "\e[1;35mVk:\e[0m" "\e[1;36mhttps://vk.com/shynolinux\e[0m";
+echo "";
+input;
+  read choice
+    case $choice in
+"b") shyno; ;;
+"u") ./data/update/update.sh; shyno; ;;
+"x") echo ""; exit 0; ;;
+*) error; aboutProgram; ;;
     esac;
 }
 
@@ -438,42 +462,35 @@ echo -en "\e[1;30mpress any key: \e[0m";
 shyno()
 {
 banner;
+echo -e "\e[1;30mTo exit: \"x\"\e[0m";
+echo "";
 echo -e "\e[1;35m/ \e[0m""\e[1;36m1\e[0m""\e[1;35m / \e[0m""\e[1;36mcreate bash\e[0m";
 echo -e "\e[1;35m/ \e[0m""\e[1;36m2\e[0m""\e[1;35m / \e[0m""\e[1;36mbash pattern\e[0m";
 echo -e "\e[1;35m/ \e[0m""\e[1;36m3\e[0m""\e[1;35m / \e[0m""\e[1;36mreturn bash\e[0m";
 echo -e "\e[1;35m/ \e[0m""\e[1;36m4\e[0m""\e[1;35m / \e[0m""\e[1;36mreturn motd\e[0m";
-echo -e "\e[1;35m/ \e[0m""\e[1;36m5\e[0m""\e[1;35m / \e[0m""\e[1;36mabout us\e[0m";
-echo -e "\e[1;35m/ \e[0m""\e[1;31mu\e[0m""\e[1;35m / \e[0m""\e[1;35mupdate\e[0m";
-echo -e "\e[1;35m/ \e[0m""\e[1;31mx\e[0m""\e[1;35m / \e[0m""\e[1;31mexit\e[0m";
+echo -e "\e[1;35m/ \e[0m""\e[1;36m5\e[0m""\e[1;35m / \e[0m""\e[1;36mabout program\e[0m";
 input;
- read shy
-    case $shy in
+ read choice
+    case $choice in
 1) timeDisplay; ;;
 2) patternBash; ;;
 3) returnBash; ;;
 4) returnMotd; ;;
-5) aboutUs; ;;
-"u") ./data/update/update.sh; shyno; ;;
+5) aboutProgram; ;;
 "x") echo ""; exit 0; ;;
 *) error; shyno; ;;
     esac;
 }
 
 
-checkTermuxOrLinux()
+checkingSystem()
 {
   if [[ -d /data/data/com.termux/files/home ]]; then
 shyno;
   else
 banner;
 echo -e "\e[1;35mIt's not termux :(\e[0m";
-echo "";
-echo -en "\e[1;30mpress any key: \e[0m";
- read checkTermuxOrLinux
-    case $checkTermuxOrLinux in
-"") echo ""; exit 0; ;;
-*) echo ""; exit 0; ;;
-    esac;
+anyKey echo ""; exit 0;
   fi;
 }
-checkTermuxOrLinux;
+checkingSystem;
