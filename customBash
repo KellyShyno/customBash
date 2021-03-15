@@ -376,9 +376,10 @@ inputYN;
 returnMotd()
 {
 banner;
-echo -e "Восстановить motd или сделать данный по умолчанию";
-echo -e "0. восстановить";
-echo -e "1. сделать данный по умолчанию";
+backOrExit;
+echo -e "Return old motd or make existing one by default?";
+echo -e "0. return old motd";
+echo -e "1. make existing one by default";
 input;
  read choice
   case $choice in
@@ -396,6 +397,9 @@ anyKey shyno;
 banner;
 echo good;
 anyKey shyno; ;;
+"b") shyno; ;;
+"x") echo ""; exit 0; ;;
+*) error; returnMotd; ;;
   esac;
 }
 
@@ -403,9 +407,10 @@ anyKey shyno; ;;
 returnBash()
 {
 banner;
-echo -e "Восстановить шелл или сделать данный по умолчанию";
-echo -e "0. восстановить";
-echo -e "1. сделать данный по умолчанию";
+backOrExit;
+echo -e "Return old bash or make existing one by default?";
+echo -e "0. return old bash";
+echo -e "1. make existing one by default";
 input;
  read choice
   case $choice in
@@ -423,6 +428,9 @@ anyKey shyno;
 banner;
 echo good;
 anyKey shyno; ;;
+"b") shyno; ;;
+"x") echo ""; exit 0; ;;
+*) error; returnBash; ;;
   esac;
 }
 
