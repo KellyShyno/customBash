@@ -1,7 +1,7 @@
 #!/bin/bash
 #shyno
 #customBash
-#version: 2.2.2
+#version: 3.0.0
 
 number='^[0-9]+$';
 chmod -R a+rx *;
@@ -17,7 +17,7 @@ echo -e '\e[1;35m / __| | | / __| __/ _ \| "_ " _ \|  _ \ / _" / __|  _ \\\e[0m'
 echo -e '\e[1;35m| (__| |_| \__ \ || (_) | | | | | | |_) | (_| \__ \ | | |\e[0m';
 echo -e '\e[1;36m \___|\__,_|___/\__\___/|_| |_| |_|____/ \__,_|___/_| |_|\e[0m';
 echo "";
-echo -e "\e[1;31mversion: 2.2.2\e[0m";
+echo -e "\e[1;31mversion: 3.0.0\e[0m";
 echo "";
 }
 
@@ -386,16 +386,16 @@ input;
 0)  if [[ -f data/backup/motd/motd ]]; then
 cp data/backup/motd/motd $PREFIX/etc/;
 banner;
-echo "old motd returned";
+echo -e "\e[1;36mold motd returned\e[0m";
 anyKey shyno;
     else
 banner;
-echo "motd backup not exist";
+echo -e "\e[1;36mmotd backup does not exist\e[0m";
 anyKey shyno;
     fi; ;;
 1) cp $PREFIX/etc/motd data/backup/motd/;
 banner;
-echo "existing motd made by default";
+echo -e "\e[1;36mexisting motd made by default\e[0m";
 anyKey shyno; ;;
 "b") shyno; ;;
 "x") echo ""; exit 0; ;;
@@ -420,16 +420,16 @@ input;
 0)  if [[ -f data/backup/bash.bashrc/bash.bashrc ]]; then
 cp data/backup/bash.bashrc/bash.bashrc $PREFIX/etc/;
 banner;
-echo "old bash returned";
+echo -e "\e[1;36mold bash returned\e[0m";
 anyKey shyno;
     else
 banner;
-echo "bash backup not exist";
+echo -e "\e[1;36mbash backup does not exist\e[0m";
 anyKey shyno;
     fi; ;;
 1) cp $PREFIX/etc/bash.bashrc data/backup/bash.bashrc/;
 banner;
-echo "existing bash made by default";
+echo -e "\e[1;36mexisting bash made by default\e[0m";
 anyKey shyno; ;;
 "b") shyno; ;;
 "x") echo ""; exit 0; ;;
@@ -441,7 +441,7 @@ anyKey shyno; ;;
 patternBash()
 {
 banner;
-echo -e "\e[1;30msoon..\e[0m";
+echo -e "\e[1;35msoon..\e[0m";
 anyKey shyno;
 }
 
