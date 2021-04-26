@@ -1,5 +1,5 @@
 #!/bin/bash
-#KellyShyno
+#shyno
 #customBash
 
 clear;
@@ -11,7 +11,7 @@ sleep 0.2;
 mkdir tmp;
 cd tmp;
 #reload repository
-git clone https://github.com/KellyShyno/customBash;
+git clone https://github.com/shyn0/customBash;
 cd customBash;
 chmod -R a+rx *;
 cp -r * ../../;

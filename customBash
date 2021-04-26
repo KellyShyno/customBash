@@ -31,7 +31,7 @@ clear; echo -e "\e[1;31mERROR: write the correct sign..\e[0m"; sleep 0.6;
 input()
 {
 echo "";
-echo -en "\e[1;35m (\e[0m""\e[1;31mo\e[0m""\e[1;35m_\e[0m""\e[1;31mO\e[0m";
+echo -en "\e[1;35m (\e[0m""\e[1;31mo\e[0m""\e[1;35m_\e[0m""\e[1;31m0\e[0m";
 echo -en "\e[1;35m)\e[0m" "\e[1;31m> \e[0m";
 }
 
@@ -494,14 +494,14 @@ input;
 }
 
 
-checkingSystem()
+systemChecking()
 {
   if [[ -d /data/data/com.termux/files/home ]]; then
 shyno;
   else
 banner;
-echo -e "\e[1;35mIt's not termux :(\e[0m";
+echo -e "\e[1;35msoon for unix too :(\e[0m";
 anyKey echo ""; exit 0;
   fi;
 }
-checkingSystem;
+systemChecking;
